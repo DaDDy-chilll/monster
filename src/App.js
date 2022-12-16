@@ -1,11 +1,11 @@
 import { Component } from "react";
 import ClardList from "./components/card-list/card-list.component";
 import SearchBox from "./components/search-box/search-box.component";
-class App extends Component() {
+class App extends Component {
   constructor() {
     super();
     this.state = {
-      monster: [],
+      monsters: [],
       searchString: "",
     };
   }
@@ -14,7 +14,7 @@ class App extends Component() {
       .then((res) => res.json())
       .then((users) => {
         this.setState(() => {
-          return { monster: users };
+          return { monsters: users };
         });
       });
   }
@@ -27,9 +27,9 @@ class App extends Component() {
   };
 
   render() {
-    const { monster, searchString } = this.state;
+    const { monsters, searchString } = this.state;
     const { onSearchChange } = this;
-    const filterMonsters = monster.filter((monster) => {
+    const filterMonsters = monsters.filter((monster) => {
       return monster.name.toLowerCase().includes(searchString);
     });
     return (
@@ -40,7 +40,7 @@ class App extends Component() {
           placeholder="Enter monster"
           className="search-box"
         />
-        <ClardList monster={filterMonsters} />
+        <ClardList monsters={filterMonsters} />
       </div>
     );
   }
